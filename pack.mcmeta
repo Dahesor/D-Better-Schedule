@@ -1,6 +1,10 @@
 {
     "pack": {
-        "pack_format":48,
-        "description": "§6Better Schdule\n§aBy Dahesor"
+        "pack_format":73,
+        "description": "§6Better Schdule\n§aBy Dahesor",
+        "supported_formats": {
+            "max_inclusive": 73,
+            "min_inclusive": 48
+        }
     }
 }
