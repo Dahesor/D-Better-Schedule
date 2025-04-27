@@ -1,5 +1,3 @@
-# $(time) $(run)
-
 execute if entity @s[type=player] if data storage dah.sch:new new{offline:"pause"} unless data storage dah.sch:new new{flags:["no_executer"]} run return run function dah.sch:z_private/parse/player/pause
 execute if entity @s[type=player] if data storage dah.sch:new new{offline:"delay"} unless data storage dah.sch:new new{flags:["no_executer"]} run return run function dah.sch:z_private/parse/player/delay
 
@@ -9,6 +7,7 @@ scoreboard players operation current dah.sch.ram += next dah.sch.ram
 
 data modify storage dah.sch:task this set value {on:1,run:'return 1'}
 execute if entity @s run function dah.sch:z_private/parse/get_entity
+data modify storage dah.sch:task this.run set from storage dah.sch:new new.run
 
 summon marker ~ ~ ~ {Tags:["dah.sch.marker"]}
 execute as @e[type=marker,distance=..3,tag=dah.sch.marker] run tp @s ~ ~ ~ ~ ~
@@ -27,5 +26,8 @@ execute if data storage dah.sch:new new.flags run function dah.sch:z_private/par
 
 execute store result storage dah.sch:task this.on int 1 run scoreboard players get current dah.sch.ram
 data modify storage dah.sch:task stash append from storage dah.sch:task this
+data remove storage dah.sch:task this
 
 return run scoreboard players get current dah.sch.ram
+
+

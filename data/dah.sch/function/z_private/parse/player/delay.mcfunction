@@ -3,6 +3,7 @@ execute store result score current dah.sch.ram run function dah.sch:get_time
 scoreboard players operation current dah.sch.ram += next dah.sch.ram
 
 data modify storage dah.sch:task this set value {on:1,run:'return 1'}
+data modify storage dah.sch:task this.run set from storage dah.sch:new new.run
 
 summon marker ~ ~ ~ {Tags:["dah.sch.marker"]}
 execute as @e[type=marker,distance=..3,tag=dah.sch.marker] run tp @s ~ ~ ~ ~ ~
@@ -15,7 +16,6 @@ data modify storage dah.sch:task this.rot_x set from storage dah.sch:task this.r
 data modify storage dah.sch:task this.rot_y set from storage dah.sch:task this.rotation[1]
 kill @e[type=marker,distance=..3,tag=dah.sch.marker]
 
-
 execute if data storage dah.sch:new new.in run data modify storage dah.sch:task this.in set from storage dah.sch:new new.in
 execute if data storage dah.sch:new new.flags run function dah.sch:z_private/parse/flags_handler
 
@@ -26,5 +26,7 @@ data modify storage dah.sch:task this.by set from storage dah.sch:task player[0]
 data modify storage dah.sch:task que set from storage dah.sch:task player[0].task
 function dah.sch:z_private/parse/player/save/this
 data modify storage dah.sch:task player[0].task set from storage dah.sch:task que
+data remove storage dah.sch:task que
 
+data remove storage dah.sch:task this
 return run scoreboard players get current dah.sch.ram
