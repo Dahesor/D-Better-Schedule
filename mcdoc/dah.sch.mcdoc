@@ -19,8 +19,12 @@ struct dah_task{
 }
 
 enum(string) dah_flags{
+    /// The command will be run by the server, not the entity
     no_executer = "no_executer",
+    /// Output debug information to chat
     debug = "debug",
+    /// It will try to resolve the current dimension. Assumes minecraft:overworld if fail.
+    try_dimension = "try_dimension",
 }
 
 type dah_run = ([dah_task]|any)
@@ -52,12 +56,13 @@ struct dah_task_raw {
     /// What to do if the target entity is not found. Defaults to "discard". Options:
     ///     discard: Do nothing and remove the task.
     ///     delay: *FOR PLAYER* The timer ticks when the player is offline, but it only executes until the player go back online
-    ///     pause: *FOR PLAYER* Wait for the player to go back online. Timer freezes when the player is offline.
+    ///     pause: *FOR PLAYER* Timer freezes when the player is offline.
     ///     by_server: The command will be run by the server, not the entity.
     offline?: dah_offline,
     /// Defines extra behavior for the task. Options:
     ///     no_executer: The command will be run by server.
     ///     debug: Output debug information to chat.
+    ///     try_dimension: It will try to resolve the current dimension. Assumes minecraft:overworld if fail.
     flags?: [dah_flags],
 }
 
@@ -80,11 +85,16 @@ struct dah_player_task{
     offline?: dah_offline,
     flags?: [dah_flags],
     by?: #[uuid] string,
+    force?: byte @ 0..1,
 }
 
 enum(string) dah_offline{
+    ///Do nothing and remove the task.
     discard = "discard",
+    ///*FOR PLAYER ONLY* The timer ticks when the player is offline, but it only executes until the player go back online
     delay = "delay",
+    ///*FOR PLAYER ONLY* Timer freezes when the player is offline.
     pause = "pause",
+    ///The command will be run by the server, not the entity.
     by_server = "by_server"
 }

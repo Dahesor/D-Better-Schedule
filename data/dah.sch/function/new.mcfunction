@@ -20,6 +20,8 @@ data modify storage dah.sch:task this.rot_x set from storage dah.sch:task this.r
 data modify storage dah.sch:task this.rot_y set from storage dah.sch:task this.rotation[1]
 kill @e[type=marker,distance=..3,tag=dah.sch.marker]
 
+execute if data storage dah.sch:new new{flags:["try_dimension"]} run function dah.sch:z_private/parse/dimension/attempt
+execute if data storage dah.sch:new new{offline:"by_server"} run data modify storage dah.sch:task this.force set value 1b
 
 execute if data storage dah.sch:new new.in run data modify storage dah.sch:task this.in set from storage dah.sch:new new.in
 execute if data storage dah.sch:new new.flags run function dah.sch:z_private/parse/flags_handler
