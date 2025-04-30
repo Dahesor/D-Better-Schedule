@@ -74,4 +74,5 @@ Remeber to Reload Vscode. If something about this somehow goes wrong, make Vs Co
 A [gu](https://github.com/gibbsly/gu) library is included to convert UUIDs.
 
 Repository: [https://github.com/Dahesor/D-Better-Schedual](https://github.com/Dahesor/D-Better-Schedual)
+
 Modrinth: [https://modrinth.com/project/d-better-schedule](https://modrinth.com/project/d-better-schedule)
