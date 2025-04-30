@@ -25,8 +25,7 @@ What to do if the target entity is not found at the time of execution (offline, 
  * `debug`: Output debug information to chat.
  * `try_dimension`: It will try to find the current dimension. The library will read it from entity data if the executor is a player, or it trys if it is `overworld`, `the_nether` or `the_end`. Otherwise it assumes `overworld`. You may add other custom dimensions into the function tag `#dah.sch:known_dimensions`, running `execute at @s if predicate {condition:"location_check",predicate:{dimension:"foo:bar"}} run data modify storage dah.sch:task this.in set value "foo:bar"` to extend the trial and error list.
 
-`in`: `#[id="dimension"] string`,
-Specifies a dimension to run the command in. This will be overwritten by the `try_dimension` flag.
+`in`: `#[id="dimension"] string` Specifies a dimension to run the command in. This will be overwritten by the `try_dimension` flag.
 
 **Then execute `function dah.sch:new` in the desired context to schdule the command.**
 
