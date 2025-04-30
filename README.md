@@ -43,7 +43,6 @@ function dah.sch:new
 # Remove this player's attribute modifier after 10s. If the player goes offline in 10s then remove it after they log back in.
 data modify storage dah.sch:new new set value {run:"attribute @s attack_damage modifier remove foo:bar",time:200,offline:"delay"}
 function dah.sch:new
-# attribute
 ```
 
 A simple macro version of the schduler is also provided as `function dah.sch:set`. It can only take in the `time` and `run` parameter:
