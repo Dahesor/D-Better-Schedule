@@ -1,0 +1,1 @@
+$execute if data storage dah.sch:task this.by run tellraw @a ["",{"text": " - Executor: ","color": "green"},{"selector": "$(by)","color": "light_purple"}," --> ",{"text":"View UUID","color": "aqua","underlined": true,"hover_event": {"action": "show_text","value": {"nbt":"this.by","storage": "dah.sch:task","color": "yellow"}}}]

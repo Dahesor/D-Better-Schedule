@@ -1,1 +1,1 @@
-tellraw @a {"text":"[dah.sch DEBUG] ","color":"dark_aqua","extra":[{"text":"执行失败：未接到响应。请检查各参数","color":"red"}]}
+tellraw @a {text:"[dah.sch DEBUG] ",color:"dark_aqua",extra:[{text:"No Return Value Recieved: Check your command, this is likely a syntax error.",color:"red"}]}

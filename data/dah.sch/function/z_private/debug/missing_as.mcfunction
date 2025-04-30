@@ -1,1 +1,1 @@
-tellraw @a ["",{"text":"[dah.sch DEBUG] ","color":"dark_aqua","extra":[{"text":"未找到执行者：","color":"red"}]}," 执行者已经死亡或未被加载。虽然不会收到错误提示，但您的命令大概率不被执行。"]
+tellraw @a ["",{text:"[dah.sch DEBUG] ",color:"dark_aqua",extra:[{text:"No Executor Found",color:"red"}]},": the executor is offline, dead, or unloaded. Although no error will occur, this task has been discarded."]
