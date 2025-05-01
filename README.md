@@ -67,9 +67,13 @@ Example content of the `spyglass.json` file. See [Spyglass Documentation](https:
 ```
 Remeber to Reload Vscode. If something about this somehow goes wrong, make Vs Code run the `Spyglass: Reset Project Cahce` command.
 
-## Other
+## Compatibility
 
-A [gu](https://github.com/gibbsly/gu) library is included to convert UUIDs.
+This library, by itself, overrides no vanilla namespaces, does not modify/create/remove any world elemensts (blocks, entities, etc.), and all ids have the `dah.sch` prefix or namespace. Yes, this makes it follows the [Smithed](https://docs.smithed.dev/conventions/) and [essential MC Datapacks Discord Server Conventions](https://mc-datapacks.github.io/en/index.html). There should be zero worries about its compatibility.
+
+## Links
+
+A [gu](https://github.com/gibbsly/gu) library is included to convert UUIDs
 
 Repository: [https://github.com/Dahesor/D-Better-Schedule](https://github.com/Dahesor/D-Better-Schedule)
 
