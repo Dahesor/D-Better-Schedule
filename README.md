@@ -30,7 +30,7 @@ What to do if the target entity is not found at the time of execution (offline, 
 **Then execute `function dah.sch:new` in the desired context to schdule the command.**
 
 Example:
-```
+```mcfunction
 # teleport the executor back to the current loction after 1s.
 data modify storage dah.sch:new new set value {run:"tp ~ ~ ~",time:20}
 function dah.sch:new
@@ -45,7 +45,7 @@ function dah.sch:new
 ```
 
 A simple macro version of the schduler is also provided as `function dah.sch:set`. It can only take in the `time` and `run` parameter:
-```
+```mcfunction
 function dah.sch:set {run:'say 1', time: 20}
 ```
 
@@ -54,7 +54,7 @@ function dah.sch:set {run:'say 1', time: 20}
 A `dependency.zip` is included in the release. Put this file anywhere on your computer, then by creating a `spyglass.json` file at the root of your workspace, the Spyglass extension will provides you the completion and error checking of all the functions, storages, and tags you need to write to use this library.
 
 Example content of the `spyglass.json` file. See [Spyglass Documentation](https://spyglassmc.com/user/config.html) for more.
-```
+```json
 {
 	"env": {
 		"dependencies": [
