@@ -59,6 +59,8 @@ Example content of the `spyglass.json` file. See [Spyglass Documentation](https:
 	"env": {
 		"dependencies": [
 			"file:///C:/path/to/dependency.zip",
+			"@vanilla-mcdoc",
+			"@vanilla-resourcepack",
 			"@vanilla-mcdoc"
 		],
 		"gameVersion": "1.21.5"
