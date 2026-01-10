@@ -1,0 +1,76 @@
+## 使用说明
+
+**首先在storage `dah.sch:new new`中写入需要的参数**：
+
+`run`: `#[command] string` 要执行的命令，不要加斜线。***必要***
+
+`time`: `int` 等待的游戏刻。***必要***
+
+`offline`: `string`
+若执行时无法找到原实体，该如何处理：
+ * `discard`: 移除任务，不执行任何东西。
+ * `delay`: **仅玩家** 玩家下线时正常计时，但会延后至玩家再次上线时执行。
+ * `pause`: **仅玩家** 玩家下线时暂停计时。
+ * `by_server`: 该命令会由服务器尝试执行。
+
+`flags`: `[string]` 规定额外功能：
+
+ * `no_executer`: 不在上下文中记录执行实体。命令总是由服务器执行。
+ * `debug`: 向聊天栏输出日志，用于debug。
+ * `try_dimension`: 尝试记录上下文的执行维度。若执行者为玩家则总是成功。若非玩家，则穷举判断是否为`overworld`, `the_nether`或`the_end`（主世界，下界，末地）；若均失败则假定为`overworld`。你可以向这个穷举列表中添加其他的自定义维度，只需要在函数标签`#dah.sch:known_dimensions`中添加新的函数，执行`execute at @s if predicate {condition:"location_check",predicate:{dimension:"foo:bar"}} run data modify storage dah.sch:task this.in set value "foo:bar"`即可。
+
+`in`: `#[id="dimension"] string` 直接规定一个目标维度执行命令。若存在`try_dimension`则本项无效。
+
+**输入参数后，在目标上下文中执行`function dah.sch:new`以计划本任务。**
+
+示例:
+```mcfunction
+# 1秒后将执行者传送回当前位置。
+data modify storage dah.sch:new new set value {run:"tp ~ ~ ~",time:20}
+function dah.sch:new
+
+# 1秒后将当前位置设置为石头。尝试获取维度，且输出日志。
+data modify storage dah.sch:new new set value {run:"setblock ~ ~ ~ stone",time:20,flags:["debug","try_dimension"]}
+function dah.sch:new
+
+# 在10秒或移除该玩家的属性修饰器。若玩家在10秒内下线，则等到玩家上线后再移除。
+data modify storage dah.sch:new new set value {run:"attribute @s attack_damage modifier remove foo:bar",time:200,offline:"delay"}
+function dah.sch:new
+```
+
+库也提供一个简易的宏函数版本，只能接受`time`和`run`参数:
+```mcfunction
+function dah.sch:set {run:'say 1', time: 20}
+```
+
+## 依赖库文件
+
+库提供了一个`dependency.zip`文件。将其放置于工作环境中，并在vs code根文件件创建一个`spyglass.json`文件，Spyglass插件就可以读取该文件的内容，并向你提供使用本库所需的函数，storage等补全信息:
+
+示例`spyglass.json`。详见其官方文档[Spyglass Documentation](https://spyglassmc.com/user/config.html)。
+```json
+{
+	"env": {
+		"dependencies": [
+			"file:///C:/path/to/dependency.zip",
+			"@vanilla-mcdoc",
+			"@vanilla-resourcepack",
+			"@vanilla-mcdoc"
+		],
+		"gameVersion": "1.21.5"
+	}
+}
+```
+需要重载Vs Code以生效。
+
+## 卸载
+
+本库无法在加载时卸载。请先移除数据包，reload，然后依次手动执行`unload.mcfunction`文件中的命令。
+
+## 链接
+
+本库使用了[gu](https://github.com/gibbsly/gu)库以转换UUID。
+
+GitHub: [https://github.com/Dahesor/D-Better-Schedule](https://github.com/Dahesor/D-Better-Schedule)
+
+Modrinth: [https://modrinth.com/project/d-better-schedule](https://modrinth.com/project/d-better-schedule)
