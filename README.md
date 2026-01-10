@@ -1,3 +1,5 @@
+[中文](/readme/zh_cn.md)
+
 # Introduction
 
 Welcome to D's Better Schedule. This is a library that provides a scheduler that keeps the context.
