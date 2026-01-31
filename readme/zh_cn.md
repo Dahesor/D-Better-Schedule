@@ -15,10 +15,13 @@ DBS(D-Better-Schedule)库提供了一个可以保留命令上下文的schedule�
  * `pause`: **仅玩家** 玩家下线时暂停计时。
  * `by_server`: 该命令会由服务器尝试执行。
 
+`max_retry`: `int`  若`offline`为`discard`或`by_server`，则若执行时实体不存在，则会在下一刻再次尝试，最多尝试`max_retry`次。若均失败则根据`offline`放弃任务或交给服务器执行。默认为`0`。
+
 `flags`: `[string]` 规定额外功能：
 
  * `no_executer`: 不在上下文中记录执行实体。命令总是由服务器执行。
  * `debug`: 向聊天栏输出日志，用于debug。
+ * `location_less`: 不在上下文中保存位置与旋转；命令将会在世界出生点执行。
  * `try_dimension`: 尝试记录上下文的执行维度。若执行者为玩家则总是成功。若非玩家，则穷举判断是否为`overworld`, `the_nether`或`the_end`（主世界，下界，末地）；若均失败则假定为`overworld`。你可以向这个穷举列表中添加其他的自定义维度，只需要在函数标签`#dah.sch:known_dimensions`中添加新的函数，执行`execute at @s if predicate {condition:"location_check",predicate:{dimension:"foo:bar"}} run data modify storage dah.sch:task this.in set value "foo:bar"`即可。
 
 `in`: `#[id="dimension"] string` 直接规定一个目标维度执行命令。若存在`try_dimension`则本项无效。

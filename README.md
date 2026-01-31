@@ -21,9 +21,12 @@ What to do if the target entity is not found at the time of execution (offline, 
  * `pause`: **PLAYER ONLY** Timer freezes when the player is offline.
  * `by_server`: The command will be executed by the server instead.
 
+`max_retry`: `int`  If `offline` is set to `discard` or `by_server`, then if entity is not found at execution time, the task will be re-attempted on the next tick, up to `max_retry` number of times. If all retries failed then it proceeds to be discarded or executed by server accroding to `offline`. Defaults to `0`.
+
 `flags`: `[string]` Defines extra behaviors for the task. May includes:
 
  * `no_executer`: The executor will not be included in the context; the command will be run by server.
+ * `location_less`: The Location and Rotation will not be included in the context; command will be run at world spawn
  * `debug`: Output debug information to chat.
  * `try_dimension`: It will try to find the current dimension. The library will read it from entity data if the executor is a player, or it trys if it is `overworld`, `the_nether` or `the_end`. Otherwise it assumes `overworld`. You may add other custom dimensions into the function tag `#dah.sch:known_dimensions`, running `execute at @s if predicate {condition:"location_check",predicate:{dimension:"foo:bar"}} run data modify storage dah.sch:task this.in set value "foo:bar"` to extend the trial and error list.
 

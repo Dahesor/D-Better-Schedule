@@ -69,6 +69,7 @@ struct dah_task_raw {
     ///     no_executer: The command will be run by server.
     ///     debug: Output debug information to chat.
     ///     try_dimension: It will try to resolve the current dimension. Assumes minecraft:overworld if fail.
+    ///     location_less:  Position and rotation will be ignored; run at world spawn
     flags?: [dah_flags],
     /// if **offline** is set to `discard` or `by_server`, then if entity is not found at execution, the task will be retiried on the next tick, up to this number of times.
     /// If all retries failed then it proceeds to be discarded or executed by server
