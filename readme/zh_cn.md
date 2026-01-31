@@ -50,14 +50,14 @@ function dah.sch:set {run:'say 1', time: 20}
 
 ## 依赖库文件
 
-库提供了一个`dependency.zip`文件。将其放置于工作环境中，并在vs code根文件件创建一个`spyglass.json`文件，Spyglass插件就可以读取该文件的内容，并向你提供使用本库所需的函数，storage等补全信息:
+库提供了一个`DBS-Dependency.zip`文件。将其放置于工作环境中，并在vs code根文件件创建一个`spyglass.json`文件，Spyglass插件就可以读取该文件的内容，并向你提供使用本库所需的函数，storage等补全信息:
 
 示例`spyglass.json`。详见其官方文档[Spyglass Documentation](https://spyglassmc.com/user/config.html)。
 ```json
 {
 	"env": {
 		"dependencies": [
-			"file:///C:/path/to/dependency.zip",
+			"file:///C:/path/to/DBS-Dependency.zip",
 			"@vanilla-mcdoc",
 			"@vanilla-resourcepack",
 			"@vanilla-mcdoc"
