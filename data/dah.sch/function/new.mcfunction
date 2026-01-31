@@ -5,20 +5,16 @@ execute store result score next dah.sch.ram run data get storage dah.sch:new new
 execute store result score current dah.sch.ram run function dah.sch:get_time
 scoreboard players operation current dah.sch.ram += next dah.sch.ram
 
-data modify storage dah.sch:task this set value {on:1,run:'return 1'}
+data modify storage dah.sch:task this set value {on:1,run:'return 1',pos_x:"~",pos_y:"~",pos_z:"~",rot_x:"~",rot_y:"~"}
 execute if entity @s run function dah.sch:z_private/parse/get_entity
 data modify storage dah.sch:task this.run set from storage dah.sch:new new.run
 
-summon marker ~ ~ ~ {Tags:["dah.sch.marker"]}
-execute as @e[type=marker,distance=..3,tag=dah.sch.marker] run tp @s ~ ~ ~ ~ ~
-data modify storage dah.sch:task this.position set from entity @e[type=marker,distance=..3,tag=dah.sch.marker,limit=1] Pos
-data modify storage dah.sch:task this.rotation set from entity @e[type=marker,distance=..3,tag=dah.sch.marker,limit=1] Rotation
-data modify storage dah.sch:task this.pos_x set from storage dah.sch:task this.position[0]
-data modify storage dah.sch:task this.pos_y set from storage dah.sch:task this.position[1]
-data modify storage dah.sch:task this.pos_z set from storage dah.sch:task this.position[2]
-data modify storage dah.sch:task this.rot_x set from storage dah.sch:task this.rotation[0]
-data modify storage dah.sch:task this.rot_y set from storage dah.sch:task this.rotation[1]
-kill @e[type=marker,distance=..3,tag=dah.sch.marker]
+execute unless data storage dah.sch:new new{flags:["location_less"]} summon marker run function dah.sch:z_private/parse/location
+
+scoreboard players set #retry dah.sch.ram 0
+execute if data storage dah.sch:new new.max_retry store result score #retry dah.sch.ram run data get storage dah.sch:new new.max_retry
+execute if score #retry dah.sch.ram matches 1.. run data modify storage dah.sch:task this.retry set value 1
+execute if score #retry dah.sch.ram matches 1.. store result storage dah.sch:task this.retry int 1 run scoreboard players get #retry dah.sch.ram
 
 execute if data storage dah.sch:new new{flags:["try_dimension"]} run function dah.sch:z_private/parse/dimension/attempt
 execute if data storage dah.sch:new new{offline:"by_server"} run data modify storage dah.sch:task this.force set value 1b

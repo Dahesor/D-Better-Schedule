@@ -7,16 +7,19 @@ struct dah_task{
     flags?:[dah_flags],
     run?: #[command] string,
     position?: [double] @ 3,
-    pos_x?:double,
-    pos_y?:double,
-    pos_z?:double,
+    pos_x?:coord,
+    pos_y?:coord,
+    pos_z?:coord,
     rotation?: [float] @ 2,
-    rot_x?: float,
-    rot_y?: float,
+    rot_x?: coord,
+    rot_y?: coord,
     force?: byte @ 0..1,
     in?:#[id="dimension"] string,
-    debug?: byte @ 0..1
+    debug?: byte @ 0..1,
+    retry?: int @ 0..,
 }
+
+type coord = (double|"~"|float)
 
 enum(string) dah_flags{
     /// The command will be run by the server, not the entity
@@ -25,6 +28,8 @@ enum(string) dah_flags{
     debug = "debug",
     /// It will try to resolve the current dimension. Assumes minecraft:overworld if fail.
     try_dimension = "try_dimension",
+    /// Position and rotation will be ignored; run at world spawn
+    location_less = "location_less",
 }
 
 type dah_run = ([dah_task]|any)
@@ -40,6 +45,7 @@ dispatch minecraft:storage["dah.sch:task"] to struct{
     temp?: any,
     run2?: any,
     que?: [dah_player_task],
+    retry?: [dah_task]
 }
 
 dispatch minecraft:storage["dah.sch:new"] to struct{
@@ -64,6 +70,10 @@ struct dah_task_raw {
     ///     debug: Output debug information to chat.
     ///     try_dimension: It will try to resolve the current dimension. Assumes minecraft:overworld if fail.
     flags?: [dah_flags],
+    /// if **offline** is set to `discard` or `by_server`, then if entity is not found at execution, the task will be retiried on the next tick, up to this number of times.
+    /// If all retries failed then it proceeds to be discarded or executed by server
+    /// Defaults to 0 (no retries).
+    max_retry?: int @ 0..
 }
 
 struct dah_player{
@@ -86,6 +96,7 @@ struct dah_player_task{
     flags?: [dah_flags],
     by?: #[uuid] string,
     force?: byte @ 0..1,
+    retry?: int @ 0..,
 }
 
 enum(string) dah_offline{
