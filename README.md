@@ -56,14 +56,14 @@ function dah.sch:set {run:'say 1', time: 20}
 
 ## Dependency File
 
-A `dependency.zip` is included in the release. Put this file anywhere on your computer, then by creating a `spyglass.json` file at the root of your workspace, the Spyglass extension will provides you the completion and error checking of all the functions, storages, and tags you need to write to use this library.
+A `DBS-Dependency.zip` is included in the release. Put this file anywhere on your computer, then by creating a `spyglass.json` file at the root of your workspace, the Spyglass extension will provides you the completion and error checking of all the functions, storages, and tags you need to write to use this library.
 
 Example content of the `spyglass.json` file. See [Spyglass Documentation](https://spyglassmc.com/user/config.html) for more.
 ```json
 {
 	"env": {
 		"dependencies": [
-			"file:///C:/path/to/dependency.zip",
+			"file:///C:/path/to/DBS-Dependency.zip",
 			"@vanilla-mcdoc",
 			"@vanilla-resourcepack",
 			"@vanilla-mcdoc"
