@@ -1,0 +1,1 @@
+$data remove storage dah.sch:task player[{uuid:"$(out)"}]
