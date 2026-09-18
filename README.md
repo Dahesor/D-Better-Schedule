@@ -62,8 +62,6 @@ function dah.sch:set {run:'say 1', time: 20}
 
 ## Adding Known Dimensions
 
-## 添加已知维度
-
 If the context dimension is not one of the vanilla ones, the library will summon a piglin brute and read the dimension out of its NBT. This causes more performance.
 
 You may add a known dimension to the system by adding a function to the function tag `#dah.sch:known_dimensions`, running something like`execute if predicate {type:"location_check",predicate:{dimension:"foo:bar"}} run data modify storage dah.sch:task this.in set value "foo:bar"`.
